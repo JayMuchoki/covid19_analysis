@@ -118,4 +118,4 @@ where continent is not null
 order by location ,date;
 
 select * from CovidVaccinations$
-select * from CovidDeaths$
+
