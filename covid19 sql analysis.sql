@@ -120,7 +120,7 @@ order by location ,date;
 
 select * from CovidVaccinations$
 
-
+-------------------------------------------Temp Table---------------------------------------------------------------------
 select d.continent,d.location,d.date,d.population,d.new_deaths,v.new_vaccinations
 ,sum(cast(v.new_vaccinations as int) ) over(partition by d.Location order by d.location,d.date)as Total_countrys_vaccination  
  into #covid19 
