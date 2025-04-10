@@ -112,6 +112,7 @@ on d.date=v.Date
 and  d.location=v.location
 )
 
+
 select continent ,location ,date ,population,new_vaccinations,Total_countrys_vaccination,
 concat(cast(round((Total_countrys_vaccination/population)*100,2) as varchar) ,'%') from Covid19_data
 where continent is not null
@@ -119,3 +120,14 @@ order by location ,date;
 
 select * from CovidVaccinations$
 
+
+select d.continent,d.location,d.date,d.population,d.new_deaths,v.new_vaccinations
+,sum(cast(v.new_vaccinations as int) ) over(partition by d.Location order by d.location,d.date)as Total_countrys_vaccination  
+ into #covid19 
+from CovidDeaths$ d
+join CovidVaccinations$ v
+on d.date=v.Date
+and  d.location=v.location
+
+
+select * from #covid19
